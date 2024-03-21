@@ -33,11 +33,23 @@
                     <select id="role" name="role"
                         class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
                         <option value="user">User</option>
-                        <option value="Owner">Owner</option>
-                        <option value="Driver">Driver</option>
-                        
+                        <option value="owner">Owner</option>
+                        <option value="driver">Driver</option>
                     </select>
-</div>
+                </div>
+
+                <!-- Input field for insurance number -->
+                <div class="mb-6" id="insuranceNumberField" style="display: none;">
+                    <label for="insurance_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insurance Number :</label>
+                    <input type="text" id="insurance_number" name="insurance_number" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+                </div>
+
+                <!-- Input field for license number -->
+                <div class="mb-6" id="licenseNumberField" style="display: none;">
+                    <label for="license_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">License Number :</label>
+                    <input type="text" id="license_number" name="license_number" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+                </div>
+
 
 
                 <div class="flex md:flex-row flex-col justify-evenly px-6 py-4 items-center text-center">
@@ -151,5 +163,28 @@
                 }
             });
         });
-    </script>
+  
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const roleSelect = document.getElementById("role");
+    const insuranceNumberField = document.getElementById("insuranceNumberField");
+    const licenseNumberField = document.getElementById("licenseNumberField");
+
+    roleSelect.addEventListener("change", function() {
+        const selectedRole = roleSelect.value;
+
+        // Hide all input fields initially
+        insuranceNumberField.style.display = "none";
+        licenseNumberField.style.display = "none";
+
+        // Show the corresponding input field based on the selected role
+        if (selectedRole === "owner") {
+            insuranceNumberField.style.display = "block";
+        } else if (selectedRole === "driver") {
+            licenseNumberField.style.display = "block";
+        }
+    });
+});
+</script>
 @endsection

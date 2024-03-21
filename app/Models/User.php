@@ -23,6 +23,9 @@ class User extends Authenticatable
         'password',
         'role',
         'reservation_id',
+        'insurance_number',
+        'license_number',   
+
         'avatar'
     ];
 

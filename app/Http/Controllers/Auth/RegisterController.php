@@ -60,6 +60,8 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', 'max:255'],
+            'insurance_number' => ['nullable', 'string', 'max:255'], // New validation rule for insurance_number
+            'license_number' => ['nullable', 'string', 'max:255'], // New validation rule for license_number
 
         ]);
     }
@@ -134,6 +136,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'role' => $data['role'],
+            'insurance_number' =>$data['insurance_number'], // New validation rule for insurance_number
+            'license_number' => $data['license_number'],// New validation rule for license_number
             'password' => Hash::make($data['password']),
         ]);
     }
