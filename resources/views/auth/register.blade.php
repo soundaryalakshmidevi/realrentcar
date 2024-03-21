@@ -29,14 +29,14 @@
                 </div>
 
                 <div class="mb-6">
-    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role :</label>
-    <select id="role" name="role"
-        class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
-        <option value="user">Client</option>
-        <option value="admin">Owner</option>
-        <option value="admin">Driver</option>
-        
-    </select>
+                    <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role :</label>
+                    <select id="role" name="role"
+                        class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+                        <option value="user">User</option>
+                        <option value="Owner">Owner</option>
+                        <option value="Driver">Driver</option>
+                        
+                    </select>
 </div>
 
 
