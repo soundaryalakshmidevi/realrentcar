@@ -37,9 +37,8 @@
 
         </div>
         <div class=" p-3 mb-8">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3464.9188930414984!2d-8.984100424763344!3d29.722108575087578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdb6b1b1966dcdef%3A0x2bf9c55ec4ef96f9!2sIsta%20Tafraout!5e0!3m2!1sen!2sma!4v1686498234799!5m2!1sen!2sma"
-                class="w-full h-96" allowfullscreen="" loading="lazy"
+           <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d246.30774358596142!2d77.42098797872639!3d8.979150451858832!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b069dc301286259%3A0x3ce75e35eb627fdf!2sKite%20Career!5e0!3m2!1sen!2sin!4v1711016083473!5m2!1sen!2sin"
+                    class="w-full h-96" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
 

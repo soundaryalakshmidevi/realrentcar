@@ -59,10 +59,21 @@
                                     <p class="text-pr-600 font-semibold text-lg">{{ $reservation->total_price }} <span
                                             class="text-black">$</span> </p>
                                 </div>
-
-
-
                             </div>
+                    
+                            <div class="mt-8 flex justify-start md:gap-16 gap-6">
+                            <p class="text-lg font-medium">Payment  Method: </p>
+                                <select name="payment_method" id="payment_method"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                                    <option value="cash_on_delivery">Cash on Delivery</option>
+                                    <option value="qr_code">QR Code</option>
+                                </select>
+                            </div>
+
+                            <div id="qr_code" class="hidden mt-4">
+                                <img src="..\public\images\qrcode.png" alt="QR Code Image" style="width: 200px; height: 200px;" >
+                            </div>
+
                             <div class="mt-8 flex justify-start md:gap-16 gap-6">
 
                                 <div class="flex md:gap-2 items-center">
@@ -80,6 +91,8 @@
                                         @endif
                                     </div>
                                 </div>
+
+
                                 <div class="flex gap-2 items-center">
                                     <p class="text-lg font-medium">Reservation: </p>
                                     <div class="px-4 py-3 text-sm ">
@@ -100,6 +113,8 @@
                                 </div>
 
                             </div>
+
+                            
 
                             <div class="w-[350px] h-[250px]  overflow-hidden p-1  md:hidden  mx-auto mt-3 rounded-md">
                             <img loading="lazy" class="w-full h-full object-cover overflow-hidden rounded-md"
@@ -127,3 +142,17 @@
         </div>
     </div>
 @endsection
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var paymentMethodSelect = document.getElementById("payment_method");
+        var qrCodeDiv = document.getElementById("qr_code");
+
+        paymentMethodSelect.addEventListener("change", function() {
+            if (paymentMethodSelect.value === "qr_code") {
+                qrCodeDiv.classList.remove("hidden");
+            } else {
+                qrCodeDiv.classList.add("hidden");
+            }
+        });
+    });
+</script>
