@@ -34,12 +34,20 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-
-        if (Auth::check() && Auth::user()->role == 'admin') {
-            return RouteServiceProvider::ADMIN;
+        if (Auth::check()) {
+            $role = Auth::user()->role;
+    
+            if ($role === 'admin') {
+                return RouteServiceProvider::ADMIN;
+            } elseif ($role === 'driver') {
+                return RouteServiceProvider::DRIVER;
+            } else {
+                return RouteServiceProvider::HOME;
+            }
         }
         return RouteServiceProvider::HOME;
     }
+    
 
     /**
      * Create a new controller instance.

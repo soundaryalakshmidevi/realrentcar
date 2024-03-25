@@ -17,6 +17,7 @@ class adminDashboardController extends Controller
     {
         $clients = User::where('role', 'client')->count();
         $admins = User::where('role', 'admin')->count();
+        $admins = User::where('role', 'driver')->count();
         $cars = Car::all();
 
         $reservations = Reservation::paginate(8);

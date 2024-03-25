@@ -12,10 +12,12 @@ use App\Http\Controllers\addNewAdminController;
 use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\AdminAuth\LoginController;
 use App\Http\Controllers\carSearchController;
+use App\Http\Controllers\driverDashboardController;
 use App\Models\User;
 use App\Models\Car;
 use App\Models\Reservation;
-
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\DriverMiddleware;
 
 // ------------------- guest routes --------------------------------------- //
 Route::get('/', function () {
@@ -57,12 +59,17 @@ function () {
 
 // ------------------- admin routes --------------------------------------- //
 
+Route::prefix('driver')->middleware(['auth', driverMiddleware::class])->group(function () {
+    Route::get('/dashboard', driverDashboardController::class)->name('driver.dashboard');
+});
 Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get(
         '/dashboard',
         adminDashboardController::class
     )->name('adminDashboard');
+
+  
 
     Route::resource('cars', CarController::class);
 
