@@ -55,15 +55,37 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // return Validator::make($data, [
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'string', 'min:8', 'confirmed'],
+        //     'role' => ['required', 'string', 'max:255'],
+        //     'insurance_number' => ['nullable', 'string', 'max:255'], // New validation rule for insurance_number
+        //     'license_number' => ['nullable', 'string', 'max:255'], // New validation rule for license_number
+
+        // ]);
+
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'address1' => ['nullable', 'string', 'max:255'], 
+            'address2' => ['nullable', 'string', 'max:255'], 
+            'city' => ['nullable', 'string', 'max:255'], 
+            'pincode' => ['nullable', 'string', 'max:255'], 
+            'mobile_no' => ['nullable', 'string', 'max:255'], 
+            'alternate_no' => ['nullable', 'string', 'max:255'], 
+            'age' => ['nullable', 'string', 'max:255'], 
+            'gender' => ['nullable', 'string', 'max:255'],
             'role' => ['required', 'string', 'max:255'],
-            'insurance_number' => ['nullable', 'string', 'max:255'], // New validation rule for insurance_number
-            'license_number' => ['nullable', 'string', 'max:255'], // New validation rule for license_number
-
+            'status' => ['nullable', 'string', 'max:255'],
+            'reservation_id' => ['nullable', 'string', 'max:255'], 
+            'insurance_number' => ['nullable', 'string', 'max:255'],
+            'license_number' => ['nullable', 'string', 'max:255'], 
+           // 'avatar' => ['nullable', 'string', 'max:255'], 
         ]);
+        
     }
 
     /**

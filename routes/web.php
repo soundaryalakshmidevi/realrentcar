@@ -13,11 +13,12 @@ use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\AdminAuth\LoginController;
 use App\Http\Controllers\carSearchController;
 use App\Http\Controllers\driverDashboardController;
+use App\Http\Controllers\ownerDashboardController;
 use App\Models\User;
 use App\Models\Car;
 use App\Models\Reservation;
 use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\DriverMiddleware;
+
 
 // ------------------- guest routes --------------------------------------- //
 Route::get('/', function () {
@@ -59,9 +60,15 @@ function () {
 
 // ------------------- admin routes --------------------------------------- //
 
-Route::prefix('driver')->middleware(['auth', driverMiddleware::class])->group(function () {
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
     Route::get('/dashboard', driverDashboardController::class)->name('driver.dashboard');
 });
+
+
+Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\OwnerMiddleware::class])->group(function () {
+    Route::get('/dashboard', ownerDashboardController::class)->name('owner.dashboard');
+});
+
 Route::prefix('admin')->middleware('admin')->group(function () {
 
     Route::get(
@@ -80,9 +87,12 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     Route::get('/users', function () {
 
         $admins = User::where('role', 'admin')->get();
+        $owners = User::where('role', 'owner')->get();
+        $drivers = User::where('role', 'driver')->get(); 
+        $users = User::where('role', 'user')->get();// 
         $clients = User::where('role', 'client')->paginate(5);
 
-        return view('admin.users', compact('admins', 'clients'));
+        return view('admin.users', compact('admins', 'clients','owners','drivers','users'));
     })->name('users');
 
     Route::get('/updatePayment/{reservation}', [ReservationController::class, 'editPayment'])->name('editPayment');

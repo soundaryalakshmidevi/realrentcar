@@ -41,9 +41,9 @@ class LoginController extends Controller
                 return RouteServiceProvider::ADMIN;
             } elseif ($role === 'driver') {
                 return RouteServiceProvider::DRIVER;
-            } else {
-                return RouteServiceProvider::HOME;
-            }
+            } elseif ($role === 'owner') {
+                return RouteServiceProvider::OWNER;
+            } 
         }
         return RouteServiceProvider::HOME;
     }

@@ -15,14 +15,17 @@ class adminDashboardController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $clients = User::where('role', 'client')->count();
-        $admins = User::where('role', 'admin')->count();
-        $admins = User::where('role', 'driver')->count();
+            $clients = User::where('role', 'client')->count();
+            $admins = User::where('role', 'admin')->count();
+            $drivers = User::where('role', 'driver')->count();
+            $owners = User::where('role', 'owner')->count();
+            $users = User::all()->count();
+        // $admins = User::all();
         $cars = Car::all();
 
         $reservations = Reservation::paginate(8);
         $insurances = Insurance::all();
         $avatars = User::all();
-        return view('admin.adminDashboard', compact('clients', 'avatars', 'admins', 'cars', 'reservations', 'insurances'));
+        return view('admin.adminDashboard', compact('clients','users' , 'avatars', 'admins', 'cars', 'reservations', 'insurances'));
     }
 }

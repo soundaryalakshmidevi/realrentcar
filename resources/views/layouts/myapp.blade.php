@@ -18,6 +18,9 @@
         html {
             scroll-behavior: smooth;
         }
+        #scrollToTopButtonContainer {
+        display: none;
+        }
     </style>
 </head>
 
@@ -402,12 +405,10 @@
                             </svg>
                         </a> -->
                         <a href="https://www.facebook.com/kitecareer.kitecareer.5?mibextid=2JQ9oc" target='_blank' class="text-gray-500 hover:text-white">
-                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.627-5.373-12-12-12zm2.148 6.025v1.582h-1.073c-.235 0-.494.294-.494.657v1.208h1.576v1.664h-1.576v4.214h-1.969v-4.214h-1.36v-1.664h1.36v-1.31c0-1.514 1.123-2.746 2.515-2.746h1.073z"/>
-                            </svg>
+                        </svg>
                     </a>
-
-                        
                         <a href="https://twitter.com/KiteCareer2018" target='_blank' class="text-gray-500 hover:text-white">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path
@@ -436,21 +437,22 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </a>
+                        
 
 
 
                     </div>
                 </div>
-                <div>
-                    <a href="javascript:void(0);" onclick="scrollToTop();"
-                        class="mt-0 absolute top-80 right-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512">
-                            <path
-                                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM135.1 217.4l107.1-99.9c3.8-3.5 8.7-5.5 13.8-5.5s10.1 2 13.8 5.5l107.1 99.9c4.5 4.2 7.1 10.1 7.1 16.3c0 12.3-10 22.3-22.3 22.3H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H150.3C138 256 128 246 128 233.7c0-6.2 2.6-12.1 7.1-16.3z" />
-                        </svg>
-                    </a>
+                <div id="scrollToTopButtonContainer">
+    <a href="javascript:void(0);" onclick="scrollToTop();"
+        class="text-white fixed bottom-10 md:-right-0 -right-2">
+        <svg xmlns="http://www.w3.org/2000/svg" height="3em" viewBox="0 0 512 512">
+            <path
+                d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM135.1 217.4l107.1-99.9c3.8-3.5 8.7-5.5 13.8-5.5s10.1 2 13.8 5.5l107.1 99.9c4.5 4.2 7.1 10.1 7.1 16.3c0 12.3-10 22.3-22.3 22.3H304v96c0 17.7-14.3 32-32 32H240c-17.7 0-32-14.3-32-32V256H150.3C138 256 128 246 128 233.7c0-6.2 2.6-12.1 7.1-16.3z" />
+        </svg>
+    </a>
+</div>
 
-                </div>
             </div>
 
         </footer>
@@ -459,6 +461,15 @@
 
 </body>
 <script>
+    var scrollToTopButtonContainer = document.getElementById('scrollToTopButtonContainer');
+
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 0) {
+        scrollToTopButtonContainer.style.display = 'block';
+    } else {
+        scrollToTopButtonContainer.style.display = 'none';
+    }
+});
     function scrollToTop() {
         window.scrollTo({
             top: 0,

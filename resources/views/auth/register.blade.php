@@ -38,11 +38,57 @@
                     </select>
                 </div>
 
-                <!-- Input field for insurance number -->
+               
+
                 <div class="mb-6" id="insuranceNumberField" style="display: none;">
-                    <label for="insurance_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insurance Number :</label>
-                    <input type="text" id="insurance_number" name="insurance_number" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
-                </div>
+    <label for="insurance_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Insurance Number :</label>
+    <input type="text" name="insurance_number" id="insurance_number" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6" id="add1" style="display: none;">
+    <label for="address1" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address 1 :</label>
+    <input type="text" name="address1" id="address1" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6" id="add2" style="display: none;">
+    <label for="address2" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address 2 :</label>
+    <input type="text" name="address2" id="address2" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6" id="ci" style="display: none;">
+    <label for="city" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City :</label>
+    <input type="text" name="city" id="city" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6" id="pin" style="display: none;">
+    <label for="pincode" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pincode :</label>
+    <input type="text" name="pincode" id="pincode" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6"  id="mob_no" style="display: none;">
+    <label for="mobile_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mobile No :</label>
+    <input type="text" name="mobile_no" id="mobile_no" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6"  id="al_no" style="display: none;">
+    <label for="alternate_no" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alternate No :</label>
+    <input type="text" name="alternate_no" id="alternate_no" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6"  id="ag" style="display: none;">
+    <label for="age" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age :</label>
+    <input type="text" name="age" id="age" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6"  id="gen" style="display: none;">
+    <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender :</label>
+    <input type="text" name="gender" id="gender" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
+
+<div class="mb-6"   id="sta" style="display: none;">
+    <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status :</label>
+    <input type="text" name="status" id="status" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+</div>
 
                 <!-- Input field for license number -->
                 <div class="mb-6" id="licenseNumberField" style="display: none;">
@@ -181,8 +227,40 @@ document.addEventListener("DOMContentLoaded", function() {
         // Show the corresponding input field based on the selected role
         if (selectedRole === "owner") {
             insuranceNumberField.style.display = "block";
+            add1.style.display="block";
+            add2.style.display="block";
+            ci.style.display="block";
+            pin.style.display="block";
+            mob_no.style.display="block";
+         
+            ag.style.display="block";
+            gen.style.display="block";
+            sta.style.display="block";
+
         } else if (selectedRole === "driver") {
             licenseNumberField.style.display = "block";
+            
+            add1.style.display="block";
+            add2.style.display="block";
+            ci.style.display="block";
+            pin.style.display="block";
+            mob_no.style.display="block";
+            al_no.style.display="block";
+            ag.style.display="block";
+            gen.style.display="block";
+            sta.style.display="block";
+        }else if (selectedRole === "driver") {
+            licenseNumberField.style.display = "block";
+            
+            add1.style.display="block";
+            
+            ci.style.display="block";
+            pin.style.display="block";
+            mob_no.style.display="block";
+            al_no.style.display="block";
+            ag.style.display="block";
+            gen.style.display="block";
+            sta.style.display="block";
         }
     });
 });

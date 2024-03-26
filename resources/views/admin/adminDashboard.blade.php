@@ -26,7 +26,7 @@
                                         Total clients
                                     </p>
                                     <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                                        {{ $clients + $admins }} (admins: {{ $admins }}) </p>
+                                        {{  $users }} (admins: {{ $admins }}) </p>
                                 </div>
                             </div>
                         </a>
