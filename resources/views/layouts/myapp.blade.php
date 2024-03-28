@@ -196,29 +196,30 @@
                                 aria-labelledby="dropdownDefaultButton">
                                 <li>
                                     <a href="{{ route('adminDashboard') }}"
-                                        class="block px-4 py-2 hover:bg-pr-200 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-                                </li>
-                                <li>
-                                    <a class="block px-4 py-2 hover:bg-pr-200 " href="{{ route('logout') }}"
+                                        class="block px-4 py-2 hover:bg-pr-200 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard
+                                    </a>
+                                        </li>
+                                        <li>
+                                        <a class="block px-4 py-2 hover:bg-pr-200 " href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
-                                    </a>
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="hidden">
                                         @csrf
-                                    </form>
+                                     </form>
 
-                                </li>
+                                    </li>
                             </ul>
                         </div>
-                    @else
+                    @elseif (Auth::user()->role == 'driver')
                         <div class="hidden justify-between items-center w-full lg:flex lg:w-auto" id="mobile-menu-2">
                             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                                 <li>
 
-                                    <a href="/">
+                                    <a href="{{ route('driver.driverdashboard') }}">
                                         <div class="group text-center">
                                             <div class="group-hover:cursor-pointer">Home</div>
                                             <div
@@ -285,6 +286,15 @@
                                     <a href="{{ route('clientReservation') }}"
                                         class="block px-4 py-2 hover:bg-pr-200 ">Reservations</a>
                                 </li>
+
+
+                                <li>
+                                 
+                                    <a href="{{ route('driver.dashboard') }}"
+                                        class="block px-4 py-2 hover:bg-pr-200 ">Dashboard</a>
+                                </li>
+
+                              
 
                                 <li>
                                     <a class="block px-4 py-2 hover:bg-pr-200 " href="{{ route('logout') }}"

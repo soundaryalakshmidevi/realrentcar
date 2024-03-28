@@ -60,10 +60,17 @@ function () {
 
 // ------------------- admin routes --------------------------------------- //
 
+
+
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-    Route::get('/dashboard', driverDashboardController::class)->name('driver.dashboard');
+    Route::get('/driverdashboard', driverDashboardController::class)->name('driver.driverdashboard');
 });
 
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
+    Route::get('/dashboard', [driverDashboardController::class, 'index'])->name('driver.dashboard');
+});
+
+//Route::get('/contact/{id}/{title}', [App\Http\Controllers\Frontend\ContactController::class, 'getContactData'])->name('frontend.contact');
 
 Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\OwnerMiddleware::class])->group(function () {
     Route::get('/dashboard', ownerDashboardController::class)->name('owner.dashboard');
