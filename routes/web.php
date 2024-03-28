@@ -62,14 +62,15 @@ function () {
 
 
 
+
+
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-    Route::get('/driverdashboard', driverDashboardController::class)->name('driver.driverdashboard');
+    Route::get('/dashboard', driverDashboardController::class)->name('driver.dashboard');
 });
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-    Route::get('/dashboard', [driverDashboardController::class, 'index'])->name('driver.dashboard');
+    Route::get('/profile', [driverDashboardController::class, 'profile'])->name('driver.profile');
 });
-
 //Route::get('/contact/{id}/{title}', [App\Http\Controllers\Frontend\ContactController::class, 'getContactData'])->name('frontend.contact');
 
 Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\OwnerMiddleware::class])->group(function () {

@@ -36,6 +36,7 @@ class LoginController extends Controller
     {
         if (Auth::check()) {
             $role = Auth::user()->role;
+            $user_id = Auth::user()->id;
     
             if ($role === 'admin') {
                 return RouteServiceProvider::ADMIN;

@@ -219,7 +219,7 @@
                             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                                 <li>
 
-                                    <a href="{{ route('driver.driverdashboard') }}">
+                                    <a href="/">
                                         <div class="group text-center">
                                             <div class="group-hover:cursor-pointer">Home</div>
                                             <div
