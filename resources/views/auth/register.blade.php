@@ -80,15 +80,20 @@
     <input type="text" name="age" id="age" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
 </div>
 
-<div class="mb-6"  id="gen" style="display: none;">
+<div class="mb-6" id="gen">
     <label for="gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender :</label>
-    <input type="text" name="gender" id="gender" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
+    <select name="gender" id="gender" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+    </select>
 </div>
 
-<div class="mb-6"   id="sta" style="display: none;">
+
+<!-- <div class="mb-6"   id="sta" style="display: none;">
     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status :</label>
     <input type="text" name="status" id="status" class="bg-pr-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-pr-500 focus:border-pr-500 block w-full p-2.5 ">
-</div>
+</div> -->
 
                 <!-- Input field for license number -->
                 <div class="mb-6" id="licenseNumberField" style="display: none;">

@@ -71,7 +71,10 @@ Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddlewa
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
     Route::get('/profile', [driverDashboardController::class, 'profile'])->name('driver.profile');
 });
-//Route::get('/contact/{id}/{title}', [App\Http\Controllers\Frontend\ContactController::class, 'getContactData'])->name('frontend.contact');
+
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
+    Route::get('/trip', [driverDashboardController::class, 'trip'])->name('driver.trip');
+});
 
 Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\OwnerMiddleware::class])->group(function () {
     Route::get('/dashboard', ownerDashboardController::class)->name('owner.dashboard');
