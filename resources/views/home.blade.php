@@ -14,18 +14,78 @@
                     <div class="md:w-3/5 md:hidden  ">
                         <img loading="lazy" src="/images/home car.png" alt="home car">
                     </div>
-                    <p class="text-justify md:mx-0 mx-8 ">Whether you're planning a weekend
-                        getaway or a cross-country adventure, we've got you covered. With our wide selection of vehicles and
-                        convenient booking system, renting a car has never been this effortless.</p>
+                   <!--enquiry form start-->
+                   <div class="px-6 md:me-8">
+                   <form  action="{{  route('cars.show', ['car'  ]) }}" method="GET"> 
+                       
+                        @csrf
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+
+                            <input type="text" hidden name="user" value="">
+
+                            <div class="sm:col-span-3">
+                                <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Start Location</label>
+                                <div class="mt-2">
+                                    <input type="text" name="full-name" id="full-name" value=""
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                                </div>
+                                @error('name')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="email"
+                                    class="block text-sm font-medium leading-6 text-gray-900">End Location</label>
+                                <div class="mt-2">
+                                    <input type="text" name="email" id="email" value=""
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                                </div>
+                                @error('email')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="sm:col-span-3">
+                                <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">Start at
+                                </label>
+                                <div class="mt-2">
+                                    <input type="date" name="start_date" id="start_date"
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                                </div>
+                                @error('start_date')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="sm:col-span-3">
+                                <label for="end_date" class="block text-sm font-medium leading-6 text-gray-900">End at
+                                </label>
+                                <div class="mt-2">
+                                    <input type="date" name="end_date" id="end_date"
+                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                                </div>
+                                @error('end_date')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="mt-12 md:block hidden">
+                        <a  class="text-white bg-pr-400 p-3 w-full rounded-lg font-bold hover:bg-black shadow-xl hover:shadow-none block text-center">
+                            SEARCH AVAILABLE CARS
+                        </a>
+                     </div>
+
+                    </form>
+                </div>
+                   <!--enquiry form end-->
+
                     <div class="flex justify-center md:justify-start mt-12 md:w-2/3 me-12 md:-ms-12">
-                        <a href="/cars">
+                        <!-- <a href="/cars">
                             <button
                                 class="bg-pr-400 p-2 border-2 border-white rounded-md text-white hover:bg-pr-500 w-32 md:me-12 md:mx-12 mx-7 font-bold ">CARS</button>
-                        </a>
-                        <a href="/contact_us">
-                            <button class="border-2 border-pr-400 text-black w-32 p-2 rounded-md hover:bg-sec-400">CONTACT
-                                US</button>
-                        </a>
+                        </a> -->
+                       
+
                     </div>
                 </div>
                 <div class="md:w-3/5 hidden md:block  ">
@@ -37,7 +97,7 @@
             {{-- Cars Section --}}
 
 
-            <div class="mx-auto max-w-screen-xl">
+            <!-- <div class="mx-auto max-w-screen-xl">
                 <div class="flex align-middle justify-center">
                     <hr class=" mt-8 h-0.5 w-2/5 bg-pr-500">
                     <p class="my-2 mx-8  p-2 font-car font-bold text-pr-400 text-lg ">CARS</p>
@@ -141,7 +201,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
 
             {{-- Why us section  --}}

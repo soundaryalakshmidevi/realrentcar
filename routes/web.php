@@ -18,9 +18,16 @@ use App\Models\User;
 use App\Models\Car;
 use App\Models\Reservation;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\homeController;
 
 
 // ------------------- guest routes --------------------------------------- //
+Route::get('/', [homeController::class, 'index'])->name('home');
+
+Route::get('/cars', [homeController::class, 'show'])->name('cars.show');
+
+
+
 Route::get('/', function () {
     $cars = Car::take(6)->where('status', '=', 'available')->get();
     return view('home', compact('cars'));
@@ -51,6 +58,7 @@ Route::get('/terms_conditions',
 function () {
     return view('Terms_Conditions');
 })->name('terms_conditions');
+
 
 
 // -------------------------------------------------------------------------//

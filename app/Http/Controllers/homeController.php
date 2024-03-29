@@ -8,28 +8,38 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Carbon\Carbon;
 
-class ReservationController extends Controller
+class homeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-    }
-
+    public function index(Request $request)
+{
+    $start = Carbon::parse($request->start_date); // Ensure $request is injected and available
+    $end = Carbon::parse($request->end_date);
+    return view('home', compact('start', 'end')); // Ensure $start is passed to the view
+}
     /**
      * Show the form for creating a new resource.
      */
+    
+     public function show(Request $request)
+     {  
+         $startDate = $request->input('start_date');
+         $endDate = $request->input('end_date');
+     
+         // Your logic to retrieve available cars based on the start date and end date
+         $car = Car::find($request->input('car')); // Assuming you want to find a specific car based on the provided car_id
+     
+         return view('cars.cars', ['startDate' => $startDate, 'endDate' => $endDate, 'car' => $car]);
+     }
+     
+    
     public function create($car_id)
     {
         $user = auth()->user();
         $car = Car::find($car_id);
-        return view('reservation.create', compact('car', 'user'));
-    }
-
-    public function show(Reservation $reservation)
-    {
-       
+        return view('home', compact('car', 'user'));
     }
     /**
      * Store a newly created resource in storage.
@@ -71,7 +81,7 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-  
+    
 
     /**
      * Show the form for editing the specified resource.
