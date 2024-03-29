@@ -311,6 +311,104 @@
                                 </li>
                             </ul>
                         </div>
+
+                        @elseif (Auth::user()->role == 'owner')
+                        <div class="hidden justify-between items-center w-full lg:flex lg:w-auto" id="mobile-menu-2">
+                            <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+                                <li>
+
+                                    <a href="/">
+                                        <div class="group text-center">
+                                            <div class="group-hover:cursor-pointer">Home</div>
+                                            <div
+                                                class="block invisible bg-pr-400 w-12 h-1 rounded-md text-center -bottom-1 mx-auto relative group-hover:visible">
+                                            </div>
+                                        </div>
+                                    </a>
+
+
+
+                                </li>
+                                <li>
+                                    <a href="{{ route('cars') }}">
+                                        <div class="group text-center">
+                                            <div class="group-hover:cursor-pointer">Cars</div>
+                                            <div
+                                                class="block invisible bg-pr-400 w-8 h-1 rounded-md text-center -bottom-1 mx-auto relative group-hover:visible">
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/location">
+                                        <div class="group text-center">
+                                            <div class="group-hover:cursor-pointer">Location</div>
+                                            <div
+                                                class="block invisible bg-pr-400 w-16 h-1 rounded-md text-center -bottom-1 mx-auto relative group-hover:visible">
+                                            </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/contact_us">
+                                        <div class="group text-center">
+                                            <div class="group-hover:cursor-pointer">Contact Us</div>
+                                            <div
+                                                class="block invisible bg-pr-400 w-20 h-1 rounded-md text-center -bottom-1 mx-auto relative group-hover:visible">
+                                            </div>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                            class="text-black bg-pr-400 hover:bg-pr-600 font-medium rounded-lg text-sm px-3 py-2.5 text-center inline-flex items-center "
+                            type="button">
+                            <img loading="lazy" src="/images/user.png" width="24" alt="user icon" class="mr-3">
+                            {{ Auth::user()->name }}
+                            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7">
+                                </path>
+                            </svg>
+                        </button>
+
+                        <!-- Dropdown menu -->
+                        <div id="dropdown"
+                            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                            <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdownDefaultButton">
+
+                                <li>
+                                    <a href="{{ route('clientReservation') }}"
+                                        class="block px-4 py-2 hover:bg-pr-200 ">Reservations</a>
+                                </li>
+
+
+                                <li>
+                                 
+                                    <a href="{{ route('owner.ownerDashboard') }}"
+                                        class="block px-4 py-2 hover:bg-pr-200 ">Dashboard</a>
+                                </li>
+
+                              
+
+                                <li>
+                                    <a class="block px-4 py-2 hover:bg-pr-200 " href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="hidden">
+                                        @csrf
+                                    </form>
+
+                                </li>
+                            </ul>
+                        </div>
                     @endif
                     {{-- Mobile menu --}}
                     <button data-collapse-toggle="mobile-menu-2" type="button"

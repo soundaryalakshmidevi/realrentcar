@@ -75,10 +75,16 @@ Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddlewa
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
     Route::get('/trip', [driverDashboardController::class, 'trip'])->name('driver.trip');
 });
-
-Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\OwnerMiddleware::class])->group(function () {
-    Route::get('/dashboard', ownerDashboardController::class)->name('owner.dashboard');
+Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\ownerMiddleware::class])->group(function () {
+    Route::get('/dashboard', ownerDashboardController::class)->name('owner.ownerDashboard');
 });
+Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\ownerMiddleware::class])->group(function () {
+    Route::get('/profile', [ownerDashboardController::class, 'profile'])->name('owner.profile');
+});
+Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\ownerMiddleware::class])->group(function () {
+    Route::get('/addnewcar', [ownerDashboardController::class, 'cars'])->name('owner.cars');
+});
+
 
 Route::prefix('admin')->middleware('admin')->group(function () {
 
