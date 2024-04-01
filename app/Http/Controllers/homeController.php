@@ -25,13 +25,8 @@ class homeController extends Controller
     
      public function show(Request $request)
      {  
-         $startDate = $request->input('start_date');
-         $endDate = $request->input('end_date');
-     
-         // Your logic to retrieve available cars based on the start date and end date
-         $car = Car::find($request->input('car')); // Assuming you want to find a specific car based on the provided car_id
-     
-         return view('cars.cars', ['startDate' => $startDate, 'endDate' => $endDate, 'car' => $car]);
+        
+         return view('cars.cars');
      }
      
     

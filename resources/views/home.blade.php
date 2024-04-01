@@ -16,37 +16,12 @@
                     </div>
                    <!--enquiry form start-->
                    <div class="px-6 md:me-8">
-                   <form  action="{{  route('cars.show', ['car'  ]) }}" method="GET"> 
+                   <form action="{{ route('cars') }}" method="GET">
+ 
                        
                         @csrf
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-
-                            <input type="text" hidden name="user" value="">
-
-                            <div class="sm:col-span-3">
-                                <label for="full-name" class="block text-sm font-medium leading-6 text-gray-900">Start Location</label>
-                                <div class="mt-2">
-                                    <input type="text" name="full-name" id="full-name" value=""
-                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
-                                </div>
-                                @error('name')
-                                    <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="sm:col-span-3">
-                                <label for="email"
-                                    class="block text-sm font-medium leading-6 text-gray-900">End Location</label>
-                                <div class="mt-2">
-                                    <input type="text" name="email" id="email" value=""
-                                        class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
-                                </div>
-                                @error('email')
-                                    <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-
-                            <div class="sm:col-span-3">
+                       <div class="sm:col-span-3">
                                 <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">Start at
                                 </label>
                                 <div class="mt-2">
@@ -70,9 +45,9 @@
                             </div>
                         </div>
                         <div class="mt-12 md:block hidden">
-                        <a  class="text-white bg-pr-400 p-3 w-full rounded-lg font-bold hover:bg-black shadow-xl hover:shadow-none block text-center">
-                            SEARCH AVAILABLE CARS
-                        </a>
+                        <button type="submit" class="text-white bg-pr-400 p-3 w-full rounded-lg font-bold hover:bg-black shadow-xl hover:shadow-none block text-center">
+    SEARCH AVAILABLE CARS
+</button>
                      </div>
 
                     </form>
@@ -84,7 +59,7 @@
                             <button
                                 class="bg-pr-400 p-2 border-2 border-white rounded-md text-white hover:bg-pr-500 w-32 md:me-12 md:mx-12 mx-7 font-bold ">CARS</button>
                         </a> -->
-                       
+              
 
                     </div>
                 </div>
@@ -117,7 +92,7 @@
                 @foreach ($cars as $car)
                     <div
                         class="relative md:m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
-                        <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="{{ route('car.reservation', ['car' => $car->id]) }}">
+                       
                             <img loading="lazy" class="object-cover" src="{{ $car->image }}" alt="product image" />
                             <span
                                 class="absolute top-0 left-0 m-2 rounded-full bg-pr-400 px-2 text-center text-sm font-medium text-white">{{ $car->reduce }}
@@ -151,7 +126,7 @@
                                         class="mr-2 ml-3 rounded bg-pr-300 px-2.5 py-0.5 text-xs font-semibold">{{ $car->stars }}.0</span>
                                 </div>
                             </div>
-                            <a href="{{ route('car.reservation', ['car' => $car->id]) }}"
+                           
                                 class="flex items-center justify-center rounded-md bg-slate-900 hover:bg-pr-400 px-5 py-2.5 text-center text-sm font-medium text-white  focus:outline-none focus:ring-4 focus:ring-blue-300">
                                 <svg id="thisicon" class="mr-4 h-6 w-6" xmlns="http://www.w3.org/2000/svg" height="1em"
                                     viewBox="0 0 512 512">

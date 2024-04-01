@@ -24,7 +24,7 @@ use App\Http\Controllers\homeController;
 // ------------------- guest routes --------------------------------------- //
 Route::get('/', [homeController::class, 'index'])->name('home');
 
-Route::get('/cars', [homeController::class, 'show'])->name('cars.show');
+
 
 
 
@@ -82,7 +82,14 @@ Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddlewa
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
     Route::get('/trip', [driverDashboardController::class, 'trip'])->name('driver.trip');
+   
 });
+
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
+Route::get('/orderconfirmpage/{reservation}', [driverDashboardController::class, 'editStatus'])->name('paymentstatus');
+//Route::put('/updateReservation/{reservation}', [driverDashboardController::class, 'updateStatus'])->name('updateStatus');
+});
+
 Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\ownerMiddleware::class])->group(function () {
     Route::get('/dashboard', ownerDashboardController::class)->name('owner.ownerDashboard');
 });
@@ -140,7 +147,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
 
 
 // ------------------- client routes --------------------------------------- //
-
+//Route::get('/reservations', [ReservationController::class, 'show'])->name('car.reservation');
 Route::get('/reservations/{car}', [ReservationController::class, 'create'])->name('car.reservation')->middleware('auth', 'restrictAdminAccess');
 Route::post('/reservations/{car}', [ReservationController::class, 'store'])->name('car.reservationStore')->middleware('auth', 'restrictAdminAccess');
 

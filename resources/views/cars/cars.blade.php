@@ -1,5 +1,10 @@
 @extends('layouts.myapp')
 @section('content')
+
+<!-- Example of displaying the dates -->
+<p>Start Date: {{ $start_date }}</p>
+<p>End Date: {{ $end_date }}</p>
+
     <div class="bg-gray-200 mx-auto max-w-screen-xl mt-10 p-3 rounded-md shadow-xl">
         <form action="{{route('carSearch')}}">
             <div class="flex justify-center md:flex-row flex-col md:gap-28 gap-4">
@@ -26,6 +31,7 @@
             <div
                 class="relative md:m-10 m-4w flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
                 <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="{{ route('car.reservation', ['car' => $car->id]) }}">
+                    
                     <img loading="lazy" class="object-cover" src="{{ $car->image }}" alt="product image" />
                     <span
                         class="absolute top-0 left-0 m-2 rounded-full bg-pr-400 px-2 text-center text-sm font-medium text-white">{{ $car->reduce }}

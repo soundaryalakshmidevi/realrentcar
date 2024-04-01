@@ -127,9 +127,9 @@
                                         <th class="px-4 py-3">Duration</th>
                                         <th class="px-4 py-3 w-26">Raimining days</th>
                                         <th class="px-4 py-3">Price</th>
-                                        <th class="px-4 py-3">Paiment Status</th>
-                                        <th class="px-4 py-3">Status</th>
-                                        <th class="px-4 py-3 ">Actions</th>
+                                        <th class="px-4 py-3">Payment Status</th>
+                                        
+                                      
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
@@ -190,47 +190,17 @@
                                             </td>
 
 
-                                            <td class="px-4 py-3 text-sm ">
-                                                @if ($reservation->payment_status == 'Pending')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-yellow-300 ">{{ $reservation->payment_status }}</span>
-                                                @elseif ($reservation->payment_status == 'Canceled')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-red-500 ">{{ $reservation->payment_status }}</span>
-                                                @elseif ($reservation->payment_status == 'Paid')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-green-500 px-5">{{ $reservation->payment_status }}</span>
-                                                @endif
-                                            </td>
 
-                                            <td class="px-4 py-3 text-sm ">
-                                                @if ($reservation->status == 'Pending')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-yellow-300 ">{{ $reservation->status }}</span>
-                                                @elseif ($reservation->status == 'Ended')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-black ">{{ $reservation->status }}</span>
-                                                @elseif ($reservation->status == 'Active')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-green-500 px-4">{{ $reservation->status }}</span>
-                                                @elseif ($reservation->status == 'Canceled')
-                                                    <span
-                                                        class="p-2 text-white rounded-md bg-red-500 ">{{ $reservation->status }}</span>
-                                                @endif
-                                            </td>
 
 
                                             <td class="px-4 py-3 w-36 text-sm flex flex-col justify-center">
 
                                                 <a class="p-2 mb-1 text-white bg-pr-500 hover:bg-pr-400 font-medium rounded text-center"
-                                                    href="{{ route('editStatus', ['reservation' => $reservation->id]) }}">
-                                                    <button>Edit Status </button>
+                                                    href="{{ route('paymentstatus', ['reservation' => $reservation->id]) }}">
+                                                    <button>OK </button>
                                                 </a>
 
-                                                <a class="p-2 mb-1 text-white bg-indigo-500 hover:bg-indigo-600 font-medium rounded text-center"
-                                                    href="{{ route('editPayment', ['reservation' => $reservation->id]) }}">
-                                                    <button>Edit payment </button>
-                                                </a>
+                                               
 
                                             </td>
 
