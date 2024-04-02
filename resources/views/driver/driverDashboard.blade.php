@@ -113,6 +113,13 @@
                     </div>
 
                     <!-- New Table -->
+                        @php
+                        $id = App\Models\Reservation::where('driver_id', auth()->id())->first();
+                    @endphp
+
+                    @if ($id && ($id->status == 'Confirm' || $id->status == 'Processing' || $id->status == 'Completed'))
+                        <p>Your trip is ongoing...</p>
+                    @else
                     <div class="w-full overflow-hidden rounded-lg shadow-xs">
                         <div class="w-full overflow-x-auto">
                             <table class="w-full whitespace-no-wrap overflow-scroll table-auto">
@@ -127,7 +134,7 @@
                                         <th class="px-4 py-3">Duration</th>
                                         <th class="px-4 py-3 w-26">Raimining days</th>
                                         <th class="px-4 py-3">Price</th>
-                                        <th class="px-4 py-3">Payment Status</th>
+                                        
                                         
                                       
                                     </tr>
@@ -196,7 +203,7 @@
                                             <td class="px-4 py-3 w-36 text-sm flex flex-col justify-center">
 
                                                 <a class="p-2 mb-1 text-white bg-pr-500 hover:bg-pr-400 font-medium rounded text-center"
-                                                    href="{{ route('paymentstatus', ['reservation' => $reservation->id]) }}">
+                                                    href="{{ route('confirmstatus', ['reservation' => $reservation->id]) }}">
                                                     <button>OK </button>
                                                 </a>
 
@@ -216,7 +223,8 @@
                             {{ $reservations->links('pagination::tailwind') }}
                         </div>
                     </div>
-
+               
+                        @endif
 
 
                 </div>

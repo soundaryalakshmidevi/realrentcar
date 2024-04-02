@@ -73,7 +73,7 @@ function () {
 
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-    Route::get('/dashboard', driverDashboardController::class)->name('driver.dashboard');
+    Route::get('/dashboard', driverDashboardController::class,'index')->name('driver.dashboard');
 });
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
@@ -82,12 +82,23 @@ Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddlewa
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
     Route::get('/trip', [driverDashboardController::class, 'trip'])->name('driver.trip');
+});
+
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
+    Route::get('/addnewcar', [driverDashboardController::class, 'addnewcar'])->name('driver.addnewcar');
    
 });
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-Route::get('/orderconfirmpage/{reservation}', [driverDashboardController::class, 'editStatus'])->name('paymentstatus');
+Route::get('/orderconfirm/{reservation}', [driverDashboardController::class, 'confirmStatus'])->name('confirmstatus');
 //Route::put('/updateReservation/{reservation}', [driverDashboardController::class, 'updateStatus'])->name('updateStatus');
+});
+
+Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
+Route::get('/tripreserve/{reservation}', [driverDashboardController::class, 'editStatus'])->name('tripreserve');
+Route::put('/updatereserve/{reservation}', [driverDashboardController::class, 'updateStatus'])->name('tripstatus');
+Route::get('/editpayment/{reservation}', [driverDashboardController::class, 'editPayment'])->name('editpayment');
+Route::put('/updatepayment/{reservation}', [driverDashboardController::class, 'updatePayment'])->name('updatepayment');
 });
 
 Route::prefix('owner')->middleware(['auth', \App\Http\Middleware\ownerMiddleware::class])->group(function () {

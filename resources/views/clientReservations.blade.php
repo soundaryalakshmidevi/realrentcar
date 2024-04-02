@@ -11,7 +11,7 @@
                             class="text-lg font-car font-normal text-gray-500">Name:
                         </span>{{ Auth::user()->name }}</h2>
                     <h2 class="text-lg font-medium text-gray-900"><span
-                            class="text-lg font-car font-normal text-gray-500">Eamil:
+                            class="text-lg font-car font-normal text-gray-500">Email:
                         </span>{{ Auth::user()->email }}</h2>
 
                     <h2 class="text-lg font-medium text-green-600"><span

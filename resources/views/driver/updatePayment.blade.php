@@ -17,7 +17,7 @@
             <h2 class="text-start mt-4 text-gray-500 ">Current Payment Status: <span
                     class="text-lg text-gray-800">{{ $reservation->payment_status }}</span></h2>
             <div>
-                <form action="{{ route('updatePayment', ['reservation' => $reservation->id]) }}" method="POST">
+                <form action="{{ route('updatepayment', ['reservation' => $reservation->id]) }}" method="POST">
                     @csrf
                     @method("PUT")
                     <div class="my-5 w-full flex items-center">
