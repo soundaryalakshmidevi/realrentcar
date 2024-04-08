@@ -1,5 +1,14 @@
 @extends('layouts.myapp')
 @section('content')
+
+{{$combinedacseat}}
+
+{{$enquiry->vehicle_type}}
+
+{{$car->brand}}
+
+{{$car->model}}
+
     <div class="mx-auto max-w-screen-xl bg-white rounded-md p-6 m-8 ">
         <div class="flex justify-between md:flex-row flex-col ">
             {{-- -------------------------------------------- left -------------------------------------------- --}}
@@ -8,19 +17,19 @@
                 <h2 class=" ms-4 max-w-full font-car md:text-6xl text-4xl">{{ $car->brand }} {{ $car->model }}
                     {{ $car->engine }}
                 </h2>
-
+<!-- 
                 <div class=" flex items-end mt-8 ms-4">
-                    <h3 class="font-car text-gray-500 text-2xl">Price:</h3>
+                    <h3 class="font-car text-gray-500 text-2xl">Date&Time:</h3>
                     <p>
                         <span
-                            class=" text-3xl font-bold text-pr-400 ms-3 me-1 border border-pr-400 p-2 rounded-md">{{ $car->price_per_day }}
-                            $</span>
+                            class=" text-3xl font-bold text-pr-400 ms-3 me-1 border border-pr-400 p-2 rounded-md">{{ date('D, M d, Y ') }}
+                            </span>
                         <span
-                            class="text-lg font-medium text-red-500 line-through">{{ intval(($car->price_per_day * 100) / (100 - $car->reduce)) }}
-                            $
+                            class="text-lg font-medium text-red-500">{{ \Carbon\Carbon::now()->setTimezone('Asia/Kolkata')->format('h:i A') }}
+                            
                         </span>
                     </p>
-                </div>
+                </div> -->
 
                 <div class=" flex items-center justify-around mt-10 me-10">
                     <div class="w-1/5 md:w-1/3 h-[0.25px] bg-gray-500 "> </div>
@@ -34,6 +43,7 @@
                         method="POST">
                         @csrf
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                        <input type="hidden" name="combinedacseat" value="{{ $combinedacseat }}">
 
                             <input type="text" hidden name="user" value="{{ Auth::user()->id }}">
 
@@ -61,11 +71,14 @@
                                 @enderror
                             </div>
 
+                            
+
+
                             <div class="sm:col-span-3">
                                 <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">Start at
                                 </label>
                                 <div class="mt-2">
-                                    <input type="date" name="start_date" id="start_date"
+                                    <input type="date" name="start_date" id="start_date" value= {{$enquiry->start_date}}
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                                 </div>
                                 @error('start_date')
@@ -76,7 +89,7 @@
                                 <label for="end_date" class="block text-sm font-medium leading-6 text-gray-900">End at
                                 </label>
                                 <div class="mt-2">
-                                    <input type="date" name="end_date" id="end_date"
+                                    <input type="date" name="end_date" id="end_date" value= {{$enquiry->end_date}}
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                                 </div>
                                 @error('end_date')
@@ -84,6 +97,28 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="sm:col-span-6">
+                                <label class="block text-sm font-medium leading-6 text-gray-900">Plan</label>
+                                <div class="mt-2 flex space-x-6">
+                                    
+                                    <div>
+                                        <input type="radio" id="per_km" name="plan" value="per_km" class="text-pr-400 focus:ring-pr-400">
+                                        <label for="per_km" class="ml-2">Per Kilometer</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="per_hr" name="plan" value="per_hr" class="text-pr-400 focus:ring-pr-400">
+                                        <label for="per_hr" class="ml-2">Per Hour</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" id="per_day" name="plan" value="per_day" class="text-pr-400 focus:ring-pr-400">
+                                        <label for="per_day" class="ml-2">Per Day</label>
+                                    </div>
+                                </div>
+                                @error('plan')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
+                            </div>
                         <div class="mt-12 md:block hidden  ">
                             <button type="submit"
                                 class="text-white bg-pr-400 p-3 w-full rounded-lg font-bold hover:bg-black shadow-xl hover:shadow-none ">Order
@@ -135,16 +170,16 @@
                 </div>
 
                 <div class=" w-full   mt-8 ms-8">
-                    <p id="duration" class="font-car text-gray-600 text-lg ms-2">Duration: <span
-                            class="mx-2 font-car text-md font-medium text-gray-700 border border-pr-400 p-2 rounded-md "> X
-                            days</span>
+                    <p id="duration" class="font-car text-gray-600 text-lg ms-2">Plan Type: <span
+                            class="mx-2 font-car text-md font-medium text-gray-700 border border-pr-400 p-2 rounded-md "> 
+                            No Plan</span>
                     </p>
                 </div>
 
                 <div class=" w-full   mt-8 ms-8">
                     <p id="total-price" class="font-car text-gray-600 text-lg ms-2">Total Price: <span
-                            class="mx-2 font-car text-md font-medium text-gray-700 border border-pr-400 p-2 rounded-md "> Y
-                            $</span>
+                            class="mx-2 font-car text-md font-medium text-gray-700 border border-pr-400 p-2 rounded-md "> 
+                            RS:0</span>
                     </p>
                 </div>
                 <div id="mobile_submit_button" class="mt-12 w-full md:hidden  ">
@@ -163,24 +198,47 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // $(document).ready(function() {
+            
+        //     $('#start_date, #end_date').change(function() {
+        //         var startDate = new Date($('#start_date').val());
+        //         var endDate = new Date($('#end_date').val());
+
+        //         if (startDate && endDate && startDate <= endDate) {
+        //             var duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+        //             var pricePerDay = {{ $car->price_per_day }};
+        //             var totalPrice = duration * pricePerDay;
+
+        //             $('#duration span').text(duration + ' days');
+        //             $('#total-price span').text(totalPrice + ' $');
+        //         } else {
+        //             $('#duration span').text('X days');
+        //             $('#total-price span').text('Y $');
+        //         }
+        //     });
+        // });
+
         $(document).ready(function() {
-            $('#start_date, #end_date').change(function() {
-                var startDate = new Date($('#start_date').val());
-                var endDate = new Date($('#end_date').val());
+            $('input[name="plan"]').change(function() {
+                var selectedPlan = $('input[name="plan"]:checked').val();
 
-                if (startDate && endDate && startDate <= endDate) {
-                    var duration = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                // Update fields based on the selected plan
+                if (selectedPlan === 'per_km') {
+                    var pricePerKm = {{ $car->price_per_km }};
+                    $('#duration span').text('1 km');
+                    $('#total-price span').text(pricePerKm + ' Rs');
+                } else if (selectedPlan === 'per_hr') {
+                    var pricePerHr = {{ $car->price_per_hr }};
+                    $('#duration span').text('1 hour');
+                    $('#total-price span').text(pricePerHr + ' RS');
+                } else if (selectedPlan === 'per_day') {
                     var pricePerDay = {{ $car->price_per_day }};
-                    var totalPrice = duration * pricePerDay;
-
-                    $('#duration span').text(duration + ' days');
-                    $('#total-price span').text(totalPrice + ' $');
-                } else {
-                    $('#duration span').text('X days');
-                    $('#total-price span').text('Y $');
+                    $('#duration span').text('1 day');
+                    $('#total-price span').text(pricePerDay + ' RS');
                 }
             });
         });
+
 
         document.getElementById("mobile_submit_button").addEventListener("click", function() {
             document.getElementById("reservation_form").submit();

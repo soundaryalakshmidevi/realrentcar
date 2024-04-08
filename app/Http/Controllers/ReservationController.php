@@ -6,6 +6,7 @@ use App\Models\Car;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Tariff;
 use Carbon\Carbon;
 
 class ReservationController extends Controller
@@ -24,8 +25,37 @@ class ReservationController extends Controller
     {
         $user = auth()->user();
         $car = Car::find($car_id);
-        return view('reservation.create', compact('car', 'user'));
+        
+        // Retrieve data from query parameters
+        $enquiry = (object) [
+            'name' => request()->query('name'),
+            'email' => request()->query('email'),
+            'address' => request()->query('address'),
+            'mobile_no' => request()->query('mobile_no'),
+            'start_loc' => request()->query('start_loc'),
+            'end_loc' => request()->query('end_loc'),
+            'desc' => request()->query('desc'),
+            'start_date' => request()->query('start_date'),
+            'end_date' => request()->query('end_date'),
+            'seat' => request()->query('seat'),
+            'luggage' => request()->query('luckage'),
+            'vehicle_type' => request()->query('vehicle_type'),
+            'AC' => request()->query('AC')
+        ];
+    
+
+        $featuresAC = [];
+        if ($enquiry->AC === 'no') {
+            $featuresAC[] = 'nonac';
+        } else {
+            $featuresAC[] =  $enquiry->AC;
+        }
+        
+        $combinedacseat = $enquiry->seat.'seat' . implode('', $featuresAC);
+
+        return view('reservation.create', compact('car', 'user', 'enquiry','combinedacseat'));
     }
+    
 
     public function show(Reservation $reservation)
     {
@@ -60,10 +90,29 @@ class ReservationController extends Controller
         $reservation->status = 'Pending';
         $reservation->payment_method = 'At store';
         $reservation->payment_status = 'Pending';
+        
+        $combinedacseat = $request->input('combinedacseat');
+
+        $tariff = Tariff::where('plan_name', $combinedacseat)
+    ->where('car_brand', $car->brand)
+    ->where('car_model', $car->model)
+    ->where('vehicle_type', $car->vehicle_type)
+    ->first();
+    if ($tariff) {
+        $reservation->tariff_id = $tariff->id;
+    }
+
+
+
         $reservation->save();
 
+
+        
         $car->status = 'Reserved';
         $car->save();
+        
+
+ 
 
         return view('thankyou',['reservation'=>$reservation] );
     }
