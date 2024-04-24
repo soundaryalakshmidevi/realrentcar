@@ -131,9 +131,9 @@
             <div>
                 <h2 style="color: #ff9b00">Real Rent Car</h2>
                 <ul>
-                    <li>DR ANABDOUR AMMELEN </li>
-                    <li>TIZNIT</li>
-                    <li>+212637998660 | contact.galdi@gmail.com</li>
+                    <li>KITECAREER </li>
+                    <li>KITE</li>
+                    <li>+212637998660 | contact.kitecareer@gmail.com</li>
                 </ul>
                 <h2>Client</h2>
                 <ul>
@@ -149,24 +149,56 @@
             <table>
                 <thead>
                     <th>Car</th>
+                    @if($reservation->plan_type == 'per_km') <!-- Check if plan type is kilometer -->
+                    <th>Start KM</th>
+                    <th>End KM</th>
+                    <th>Total Kilometer</th>
+                    <th>Kilometer price</th>
+                    @elseif($reservation->plan_type == 'per_hr') <!-- Check if plan type is kilometer -->
+                    <th>Start Hour</th>
+                    <th>End Hour</th>
+                    <th>Total Hours</th>
+                    <th>Per Hour price</th>
+                    @else
                     <th>Start date</th>
-                    <th>end date</th>
+                    <th>End date</th>
                     <th>Duration</th>
                     <th>Price per day</th>
-                    <th>Reservation price</th>
+                    <th>Per Day price</th>
+                    @endif
+                    <th>Total price</th>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            <h4>{{ $reservation->car->brand }} {{ $reservation->car->model }}</h4>
-                            <p>{{ $reservation->car->engine }}</p>
-                        </td>
+                <tr>
+                    <td>
+                        <h4>{{ $reservation->car->brand }} {{ $reservation->car->model }}</h4>
+                        <p>{{ $reservation->car->engine }}</p>
+                    </td>
+                    @if($reservation->plan_type == 'per_km') <!-- Check if plan type is kilometer -->
+                        <td>{{ $reservation->start_km }}</td>
+                        <td>{{ $reservation->end_km }}</td>
+                        <td>{{ $reservation->kilometer }}</td>
+                        @elseif($reservation->plan_type == 'per_hr') <!-- Check if plan type is kilometer -->
+                        <td>{{ $reservation->start_hr }}</td>
+                        <td>{{ $reservation->end_hr }}</td>
+                        <td>{{ $reservation->hours }}</td>
+                    @else
                         <td>{{ $reservation->start_date }}</td>
                         <td>{{ $reservation->end_date }}</td>
                         <td>{{ $reservation->days }}</td>
-                        <td>{{ $reservation->price_per_day }} $ </td>
-                        <td>{{ $reservation->total_price }} $ </td>
-                    </tr>
+                    @endif
+                    
+                    <td>
+                        @if($reservation->plan_type == 'per_km')
+                            {{ $reservation->price_per_km }} $/km
+                        @elseif($reservation->plan_type == 'per_hr')
+                            {{ $reservation->price_per_hour }} $/hour
+                        @elseif($reservation->plan_type == 'per_day')
+                            {{ $reservation->price_per_day }} ₹/day
+                        @endif
+                    </td>
+                    <td>{{ $reservation->total_price }} $</td>
+                </tr>
 
                 </tbody>
             </table>
@@ -189,12 +221,13 @@
                     <tr>
                         <th style="color: #ff9b00">Total to pay</th>
                         <td>{{ $reservation->total_price - ($reservation->total_price * 85) / 100 + $reservation->total_price }}
-                            $ </td>
+                            ₹ </td>
                     </tr>
                 </table>
             </div>
 
         </div>
+        <h3 style="text-align: center; margin-top: 30px">Other charges are updated after completing your trip</h3>
         <h3 style="text-align: center; margin-top: 30px">Thank you for choosing and trusting our car company ❤️</h3>
     </div>
 </body>

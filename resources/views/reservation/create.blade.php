@@ -9,6 +9,10 @@
 
 {{$car->model}}
 
+
+{{ $tariff->price_per_km }}
+ 
+
     <div class="mx-auto max-w-screen-xl bg-white rounded-md p-6 m-8 ">
         <div class="flex justify-between md:flex-row flex-col ">
             {{-- -------------------------------------------- left -------------------------------------------- --}}
@@ -75,10 +79,10 @@
 
 
                             <div class="sm:col-span-3">
-                                <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">Start at
+                                <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">
                                 </label>
                                 <div class="mt-2">
-                                    <input type="date" name="start_date" id="start_date" value= {{$enquiry->start_date}}
+                                    <input type="hidden" name="start_date" id="start_date" 
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                                 </div>
                                 @error('start_date')
@@ -86,10 +90,10 @@
                                 @enderror
                             </div>
                             <div class="sm:col-span-3">
-                                <label for="end_date" class="block text-sm font-medium leading-6 text-gray-900">End at
+                                <label for="end_date" class="block text-sm font-medium leading-6 text-gray-900">
                                 </label>
                                 <div class="mt-2">
-                                    <input type="date" name="end_date" id="end_date" value= {{$enquiry->end_date}}
+                                    <input type="hidden" name="end_date" id="end_date" 
                                         class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                                 </div>
                                 @error('end_date')
@@ -99,27 +103,116 @@
                         </div>
 
                         <div class="sm:col-span-6">
-                                <label class="block text-sm font-medium leading-6 text-gray-900">Plan</label>
-                                <div class="mt-2 flex space-x-6">
-                                    
-                                    <div>
-                                        <input type="radio" id="per_km" name="plan" value="per_km" class="text-pr-400 focus:ring-pr-400">
-                                        <label for="per_km" class="ml-2">Per Kilometer</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="per_hr" name="plan" value="per_hr" class="text-pr-400 focus:ring-pr-400">
-                                        <label for="per_hr" class="ml-2">Per Hour</label>
-                                    </div>
-                                    <div>
-                                        <input type="radio" id="per_day" name="plan" value="per_day" class="text-pr-400 focus:ring-pr-400">
-                                        <label for="per_day" class="ml-2">Per Day</label>
-                                    </div>
-                                </div>
-                                @error('plan')
-                                    <span class="text-red-500">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        <div class="mt-12 md:block hidden  ">
+    <label class="block text-sm font-medium leading-6 text-gray-900">Plan</label>
+    <div class="mt-2 flex space-x-6">
+        <div>
+            <input type="radio" id="per_km" name="plan" value="per_km" class="text-pr-400 focus:ring-pr-400" onclick="showFields('per_km')">
+            <label for="per_km" class="ml-2">Per Kilometer</label>
+        </div>
+        <div>
+            <input type="radio" id="per_hr" name="plan" value="per_hr" class="text-pr-400 focus:ring-pr-400" onclick="showFields('per_hr')">
+            <label for="per_hr" class="ml-2">Per Hour</label>
+        </div>
+        <div>
+            <input type="radio" id="per_day" name="plan" value="per_day" class="text-pr-400 focus:ring-pr-400" onclick="showFields('per_day')">
+            <label for="per_day" class="ml-2">Per Day</label>
+        </div>
+    </div>
+    <div id="extraFields" class="mt-2">
+        <!-- Extra fields will be displayed here based on selection -->
+    </div>
+    @error('plan')
+        <span class="text-red-500">{{ $message }}</span>
+    @enderror
+</div>
+<script>
+    function showFields(plan) {
+        let extraFields = document.getElementById('extraFields');
+        let fieldsHTML = '';
+
+        if (plan === 'per_km') {
+            fieldsHTML = `
+                <div class="sm:col-span-3">
+                    <label for="start_km" class="block text-sm font-medium leading-6 text-gray-900">Start Kilometer
+                    </label>
+                    <div class="mt-2">
+                        <input type="text" name="start_km" id="start_km" 
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('start_km')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="end_km" class="block text-sm font-medium leading-6 text-gray-900">End Kilometer
+                    </label>
+                    <div class="mt-2">
+                        <input type="text" name="end_km" id="end_km" 
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('end_km')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+            `;
+        } else if (plan === 'per_hr') {
+            fieldsHTML = `
+                <div class="sm:col-span-3">
+                    <label for="start_hour" class="block text-sm font-medium leading-6 text-gray-900">Start Hour
+                    </label>
+                    <div class="mt-2">
+                        <input type="time" name="start_hour" id="start_hour" 
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('start_hour')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="end_hour" class="block text-sm font-medium leading-6 text-gray-900">End Hour
+                    </label>
+                    <div class="mt-2">
+                        <input type="time" name="end_hour" id="end_hour" 
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('end_hour')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+            `;
+        } else if (plan === 'per_day') {
+            fieldsHTML = `
+                <div class="sm:col-span-3">
+                    <label for="start_date" class="block text-sm font-medium leading-6 text-gray-900">Start date
+                    </label>
+                    <div class="mt-2">
+                        <input type="date" name="start_date" id="start_date" value="{{$enquiry->start_date}}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('start_date')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+                <div class="sm:col-span-3">
+                    <label for="end_date" class="block text-sm font-medium leading-6 text-gray-900">End date
+                    </label>
+                    <div class="mt-2">
+                        <input type="date" name="end_date" id="end_date" value="{{$enquiry->end_date}}"
+                            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                    </div>
+                    @error('end_date')
+                        <span class="text-red-500">{{ $message }}</span>
+                    @enderror
+                </div>
+            `;
+        }
+
+        extraFields.innerHTML = fieldsHTML;
+    }
+</script>
+
+
+                        <div class="mt-12 md:block hidden">
                             <button type="submit"
                                 class="text-white bg-pr-400 p-3 w-full rounded-lg font-bold hover:bg-black shadow-xl hover:shadow-none ">Order
                                 Now</button>
@@ -218,26 +311,26 @@
         //     });
         // });
 
-        $(document).ready(function() {
-            $('input[name="plan"]').change(function() {
-                var selectedPlan = $('input[name="plan"]:checked').val();
+    $(document).ready(function() {
+        $('input[name="plan"]').change(function() {
+            var selectedPlan = $('input[name="plan"]:checked').val();
 
-                // Update fields based on the selected plan
-                if (selectedPlan === 'per_km') {
-                    var pricePerKm = {{ $car->price_per_km }};
-                    $('#duration span').text('1 km');
-                    $('#total-price span').text(pricePerKm + ' Rs');
-                } else if (selectedPlan === 'per_hr') {
-                    var pricePerHr = {{ $car->price_per_hr }};
-                    $('#duration span').text('1 hour');
-                    $('#total-price span').text(pricePerHr + ' RS');
-                } else if (selectedPlan === 'per_day') {
-                    var pricePerDay = {{ $car->price_per_day }};
-                    $('#duration span').text('1 day');
-                    $('#total-price span').text(pricePerDay + ' RS');
-                }
-            });
+            // Update fields based on the selected plan
+            if (selectedPlan === 'per_km') {
+                var pricePerKm = '{{ $tariff->price_per_km }}';
+                $('#duration span').text('1 km');
+                $('#total-price span').text(pricePerKm + ' Rs');
+            } else if (selectedPlan === 'per_hr') {
+                var pricePerHr = '{{ $tariff->price_per_hr }}';
+                $('#duration span').text('1 hour');
+                $('#total-price span').text(pricePerHr + ' RS');
+            } else if (selectedPlan === 'per_day') {
+                var pricePerDay = '{{ $tariff->price_per_day }}';
+                $('#duration span').text('1 day');
+                $('#total-price span').text(pricePerDay + ' RS');
+            }
         });
+    });
 
 
         document.getElementById("mobile_submit_button").addEventListener("click", function() {

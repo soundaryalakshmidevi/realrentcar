@@ -12,9 +12,12 @@
                        
                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                        <div class="mt-2">
-                           <input type="text" name="email" id="email" value="{{ auth()->user()->email }}"
+                           <input type="text" name="email_id" id="email" value="{{ auth()->user()->email }}"
                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6" readonly>
                        </div>
+                       @error('email')
+                           <span class="text-red-500">{{ $message }}</span>
+                       @enderror
                    </div>
 
                    <div class="sm:col-span-3">
@@ -26,14 +29,12 @@
                                     <option disabled selected value="1">
                                         select car
                                     </option>
-                                    <option value="car">car</option>
-                                    <option value="bus">bus</option>
+                                    <option value="car">Car</option>
                                     <option value="van">Van</option>
-                                    <!-- <option value="luxurycar">Luxury Cars</option>
-                                    <option value="bus">Bus</option> -->
+                                    <option value="bus">Bus</option>
                                 </select>
                             </div>
-                            @error('stars')
+                            @error('vehicle_type')
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
@@ -62,7 +63,7 @@
                             @enderror
                         </div>
 
-                        <div class="sm:col-span-2 sm:col-start-1">
+                        <div class="sm:col-span-3 sm:col-start-1">
                             <label for="engine" class="block text-sm font-medium leading-6 text-gray-900">Engine</label>
                             <div class="mt-2">
                                 <input type="text" name="engine" id="engine"
@@ -73,18 +74,9 @@
                             @enderror
                         </div>
 
-                        <div class="sm:col-span-2">
-                            <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
-                            <div class="mt-2">
-                                <input type="text" name="quantity" id="quantity"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
-                            </div>
-                            @error('quantity')
-                                <span class="text-red-500">{{ $message }}</span>
-                            @enderror
-                        </div>
+                      
 
-                        <div class="sm:col-span-2">
+                        <div class="sm:col-span-3">
                             <label for="seat" class="block text-sm font-medium leading-6 text-gray-900">Seat
                                 </label>
                             <div class="mt-2">
@@ -171,7 +163,7 @@
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                             </div>
                             @error('luggage')
-                                    <span class="text-red-500">{{ $message }}</span>
+                                <span class="text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
 

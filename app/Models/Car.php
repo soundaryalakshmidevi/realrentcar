@@ -28,6 +28,10 @@ class Car extends Model
         'status',
         'approval',
         'vehicle_id',
+        'premium',
+        'premium_start_date',
+        'premium_end_date',
+        'remain_days',
     ];
     public function reservations()
     {

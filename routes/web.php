@@ -15,13 +15,15 @@ use App\Http\Controllers\AdminAuth\LoginController;
 use App\Http\Controllers\carSearchController;
 use App\Http\Controllers\driverDashboardController;
 use App\Http\Controllers\ownerDashboardController;
+use App\Http\Controllers\TripController;
 use App\Models\User;
 use App\Models\Enquiry;
 use App\Models\Car;
 use App\Models\Reservation;
+use App\Models\Premium;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\homeController;
-
+use App\Http\Controllers\premiumController;
 
 // ------------------- guest routes --------------------------------------- //
 Route::get('/', [homeController::class, 'index'])->name('home');
@@ -95,7 +97,7 @@ Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddlewa
 });
 
 Route::prefix('driver')->middleware(['auth', \App\Http\Middleware\driverMiddleware::class])->group(function () {
-Route::get('/orderconfirm/{reservation}', [driverDashboardController::class, 'confirmStatus'])->name('confirmstatus');
+Route::get('/orderconfirm/{reservation}', [TripController::class, 'confirmStatus'])->name('confirmstatus');
 //Route::put('/updateReservation/{reservation}', [driverDashboardController::class, 'updateStatus'])->name('updateStatus');
 });
 
@@ -131,7 +133,7 @@ Route::prefix('admin')->middleware('admin')->group(function () {
     // Route::resource('reservations', ReservationController::class);
 
     Route::resource('insurances', InsuranceController::class);
-
+    Route::resource('premium', premiumController::class);
     Route::get('/users', function () {
 
         $admins = User::where('role', 'admin')->get();

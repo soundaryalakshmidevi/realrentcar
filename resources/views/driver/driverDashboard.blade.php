@@ -8,7 +8,7 @@
                     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                       Driver Dashboard  
                     </h2>
-                    {{ Auth::user()->id;}}
+                    <!-- {{ Auth::user()->id;}} -->
                     <!-- Cards -->
                     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
                         <!-- Card -->
@@ -132,9 +132,9 @@
                                         <th class="px-4 py-3 w-24">Started at</th>
                                         <th class="px-4 py-3 w-24">End at</th>
                                         <th class="px-4 py-3">Duration</th>
-                                        <th class="px-4 py-3 w-26">Raimining days</th>
+                                        <th class="px-4 py-3 w-26">Remaining days</th>
                                         <th class="px-4 py-3">Price</th>
-                                        
+                                        <th class="px-4 py-3">Action</th>
                                         
                                       
                                     </tr>
@@ -193,7 +193,8 @@
                                             </td>
 
                                             <td class="px-4 py-3 text-sm">
-                                                {{ $reservation->car->price_per_day * $reservation->days }} $
+                                                <!-- {{ $reservation->car->price_per_day * $reservation->days }} $ -->
+                                                {{ $reservation->total_price}}
                                             </td>
 
 

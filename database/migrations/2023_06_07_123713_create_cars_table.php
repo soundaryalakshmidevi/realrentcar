@@ -28,6 +28,8 @@ $table->decimal('price_per_hr', 8, 2)->nullable();
 $table->decimal('price_per_day', 8, 2)->nullable();
 $table->string('image')->nullable();
 $table->string('quantity');
+
+
 $table->enum('insurance_status', ['pending', 'active','expired'])->default('pending');
 $table->string('status')->default('available');
 $table->timestamps();

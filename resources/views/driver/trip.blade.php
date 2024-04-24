@@ -34,16 +34,39 @@
                                     <tr
                                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                                         
-                                        <th class="px-4 py-3">USER</th>
-                                        <th class="px-4 py-3 w-48">Car</th>
-                                        <th class="px-4 py-3 w-24">Started at</th>
-                                        <th class="px-4 py-3 w-24">End at</th>
-                                        <th class="px-4 py-3">Duration</th>
-                                        <th class="px-4 py-3 w-26">Raimining days</th>
-                                        <th class="px-4 py-3">Price</th>
-                                        <th class="px-4 py-3">Trip Status</th>
-                                        <th class="px-4 py-3">Payment Status</th>
-                                        
+                                        <th class="px-10 py-3">USER</th>
+                                        <th class="px-10 py-3 w-48">Car</th>
+                                        <th class="px-10 py-3 w-24">Start Loc</th>
+                                        <th class="px-10 py-3 w-24">End Loc</th>
+                                        @if(isset($trips) && $trips->isNotEmpty() && $trips->first()->start_date && $trips->first()->end_date)
+                                        <th class="px-10 py-3 w-24">Start Date</th>
+                                        <th class="px-10 py-3 w-24">End Date</th>
+                                        @endif
+                                        @if(isset($trips) && $trips->isNotEmpty() && $trips->first()->start_hr && $trips->first()->end_hr)
+                                        <th class="px-10 py-3 w-24">Start Hour</th>
+                                        <th class="px-10 py-3 w-24">End hour</th>
+                                        @endif
+                                        @if(isset($trips) && $trips->isNotEmpty() && $trips->first()->start_km && $trips->first()->end_km)
+                                        <th class="px-10 py-3 w-24">Start KM</th>
+                                        <th class="px-10 py-3 w-24">End KM</th>
+                                        @endif
+                                        <th class="px-10 py-3"> 
+                                            @if(isset($trips) && $trips->isNotEmpty() && $trips->first()->total_km)
+                                            Total Km
+                                            @elseif(isset($trips) && $trips->isNotEmpty() && $trips->first()->total_hr)
+                                            Total Hours
+                                            @else
+                                            Total Days
+                                            @endif
+                                        </th>
+                                        <th class="px-10 py-3 w-26">Raimining days</th>
+                                        <th class="px-10 py-3">Price</th>
+                                        <th class="px-10 py-3">Trip Status</th>
+                                        <th class="px-10 py-3">Payment Status</th>
+                                        <th class="px-10 py-3 w-26">Extra KM</th>
+                                        <th class="px-10 py-3 w-26">Extra Charge</th>
+                                        <th class="px-10 py-3 w-26">Waiting Cgarge</th>
+                                        <th class="px-10 py-3 w-26">Minimum Charge</th>
                                         
                                       
                                     </tr>
@@ -51,90 +74,113 @@
                                 <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
 
-                                    @forelse ($confirmedReservations as $reservation)
+                                @forelse ($trips as $trip)
                                         <tr class="text-gray-700 dark:text-gray-400">
-                                            <td class="px-4 py-3">
+                                            <td class="px-10 py-3">
                                                 <div class="flex items-center text-sm">
                                                     <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
                                                         <img loading="lazy" class="object-cover w-full h-full rounded-full"
-                                                            src="{{ $reservation->user->avatar }}" alt=""
+                                                            src="{{ $trip->user->avatar }}" alt=""
                                                             loading="lazy" />
                                                         <div class="absolute inset-0 rounded-full shadow-inner"
                                                             aria-hidden="true"></div>
                                                     </div>
                                                     <div>
-                                                        <p class="font-semibold">{{ $reservation->user->name }}</p>
+                                                        <p class="font-semibold">{{ $trip->user->name }}</p>
                                                         <p class="text-xs text-gray-600 dark:text-gray-400">
-                                                            {{ $reservation->user->email }}
+                                                            {{ $trip->user->email }}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                {{ $reservation->car->brand }} {{ $reservation->car->model }}
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->car->brand }} {{ $trip->car->model }}
 
                                             </td>
 
-                                            <td class="px-4 py-3  text-sm">
-                                                {{ Carbon\Carbon::parse($reservation->start_date)->format('y-m-d') }} </td>
-                                            <td class="px-4 py-3  text-sm">
-                                                {{ Carbon\Carbon::parse($reservation->end_date)->format('y-m-d') }} </td>
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->start_loc }} 
 
+                                            </td>
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->end_loc }} 
+
+                                            </td>
+                                            <td class="px-10 py-3  text-sm">
+                                                {{ Carbon\Carbon::parse($trip->start_date)->format('y-m-d') }} </td>
+                                            <td class="px-10 py-3  text-sm">
+                                                {{ Carbon\Carbon::parse($trip->end_date)->format('y-m-d') }} </td>
+
+                                                <td class="px-10 py-3 text-sm">
+                                                {{ $trip->start_km }} 
+
+                                            </td>
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->end_km }} 
+
+                                            </td>
                                             <td class=" text-xs">
-                                                <p class="px-4 py-3 text-sm">
-                                                    {{ Carbon\Carbon::parse($reservation->end_date)->diffInDays(Carbon\Carbon::parse($reservation->start_date)) }}
-                                                    days </p>
+                                                <p class="px-10 py-3 text-sm">
+                                                @if(isset($trips) && $trips->isNotEmpty() && $trips->first()->total_km)
+                                                {{ $trip->total_km }} 
+                                                    KM
+                                                @elseif(isset($trips) && $trips->isNotEmpty() && $trips->first()->total_hr)
+                                                {{ $trip->total_hr }} 
+                                                    Hours
+                                                @else
+                                                {{ $trip->total_days }} Days
+                                                @endif
+                                                 </p>
                                             </td>
 
 
-                                            <td class="px-4 py-3 text-xs">
-                                                @if ($reservation->start_date > Carbon\Carbon::now())
-                                                    <p class="px-4 py-3 text-sm">
-                                                        {{ Carbon\Carbon::parse($reservation->end_date)->diffInDays(Carbon\Carbon::now()) }}
-                                                        days
-                                                    </p>
+                                            <td class="px-10 py-3 text-xs">
+                                                @if ($trip->start_date > Carbon\Carbon::now())
+                                                <p class="px-10 py-3 text-sm">
+                                                    {{ Carbon\Carbon::parse($trip->end_date)->diffInDays(Carbon\Carbon::now()) }}
+                                                    days
+                                                </p>
                                                 @else
-                                                    <span class="px-4 py-3 text-sm">
-                                                        {{ Carbon\Carbon::parse($reservation->end_date)->diffInDays(Carbon\Carbon::now()) }}
-                                                        days
-                                                    </span>
+                                                <span class="px-10 py-3 text-sm">
+                                                    {{ Carbon\Carbon::parse($trip->end_date)->diffInDays(Carbon\Carbon::now()) }}
+                                                    days
+                                                </span>
                                                 @endif
                                             </td>
 
-                                            <td class="px-4 py-3 text-sm">
-                                                Rs {{ $reservation->car->price_per_day * $reservation->days }} 
+                                            <td class="px-10 py-3 text-sm">
+                                                Rs {{ $trip->tariff->price_per_km * $trip->total_km }}
                                             </td>
 
-                                            <td class="px-4 py-3 text-sm">
-                                                 {{ $reservation->status}} 
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->status}} 
                                             </td>
-                                            <td class="px-4 py-3 text-sm">
-                                                 {{ $reservation->payment_status}} 
+                                            <td class="px-10 py-3 text-sm">
+                                                {{ $trip->payment_status}} 
                                             </td>
 
 
-                                            <td class="px-4 py-3 w-36 text-sm flex flex-col justify-center">
+                                            <td class="px-10 py-3 w-36 text-sm flex flex-col justify-center">
 
-                        <a class="p-2 mb-1 text-white bg-pr-500 hover:bg-pr-400 font-medium rounded text-center"
-                            href="{{ route('tripreserve', ['reservation' => $reservation->id]) }}">
-                            <button>Edit Status </button>
-                        </a>
-
-                      
-                        <a style="display:none" class="p-2 mb-1 text-white bg-indigo-500 hover:bg-indigo-600 font-medium rounded text-center"
-   href="{{ route('editpayment', ['reservation' => $reservation->id]) }}">
-    <button >Edit Payment</button>
-</a>
+                                                <a class="p-2 mb-1 text-white bg-pr-500 hover:bg-pr-400 font-medium rounded text-center"
+                                                    href="{{ route('tripreserve', ['reservation' => $trip->booking_id]) }}">
+                                                    <button>Edit Status </button>
+                                                </a>
 
 
+                                                <a style="display:none" class="p-2 mb-1 text-white bg-indigo-500 hover:bg-indigo-600 font-medium rounded text-center"
+                                                    href="{{ route('editpayment', ['reservation' => $trip->booking_id]) }}">
+                                                    <button >Edit Payment</button>
+                                                </a>
 
-                        
 
-                        </td>
+
+                                            </td>
 
                                         </tr>
-                                    @empty
-                                    @endforelse
+                                        @empty
+                                        @endforelse
+
 
 
                                 </tbody>

@@ -12,6 +12,37 @@
 
                     <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
+                    <div class="sm:col-span-3">
+                       
+                       <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
+                       <div class="mt-2">
+                           <input type="text" name="email_id" id="email" value="{{ $car->email_id }}"
+                               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                       </div>
+                       @error('email')
+                           <span class="text-red-500">{{ $message }}</span>
+                       @enderror
+                   </div>
+
+                   <div class="sm:col-span-3">
+                            <label for="vehicle_type" class="block text-sm font-medium leading-6 text-gray-900">vehicle_type
+                                </label>
+                            <div class="mt-2">
+                                <select id="vehicle_type" name="vehicle_type"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:max-w-xs sm:text-sm sm:leading-6">
+                                    <option disabled selected value="1">
+                                        select car
+                                    </option>
+                                    <option value="car" {{ $car->vehicle_type == 'car' ? 'selected' : '' }}>Car</option>
+                                    <option value="van" {{ $car->vehicle_type == 'van' ? 'selected' : '' }}>Van</option>
+                                    <option value="bus" {{ $car->vehicle_type == 'bus' ? 'selected' : '' }}>Bus</option>
+                                </select>
+                            </div>
+                            @error('stars')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
                         <div class="sm:col-span-3">
                             <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
                             <div class="mt-2">
@@ -34,7 +65,7 @@
                             @enderror
                         </div>
 
-                        <div class="sm:col-span-2 sm:col-start-1">
+                        <div class="sm:col-span-3 sm:col-start-1">
                             <label for="engine" class="block text-sm font-medium leading-6 text-gray-900">Engine</label>
                             <div class="mt-2">
                                 <input type="text" name="engine" id="engine" value="{{ $car->engine }}"
@@ -45,16 +76,40 @@
                             @enderror
                         </div>
 
-                        <div class="sm:col-span-2">
-                            <label for="quantity" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
+                        <div class="sm:col-span-3">
+                            <label for="seat" class="block text-sm font-medium leading-6 text-gray-900">Seat
+                                </label>
                             <div class="mt-2">
-                                <input type="text" name="quantity" id="quantity" value="{{ $car->quantity }}"
+                                <input type="text" name="seat" id="seat" value="{{ $car->seat }}"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
                             </div>
-                            @error('quantity')
+                            @error('seat')
                                 <span class="text-red-500">{{ $message }}</span>
                             @enderror
                         </div>
+
+                        <div class="sm:col-span-2 sm:col-start-1">
+                            <label for="price_per_km" class="block text-sm font-medium leading-6 text-gray-900">Price_per_km</label>
+                            <div class="mt-2">
+                                <input type="text" name="price_per_km" id="price_per_km" value="{{ $car->price_per_km }}"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('price_per_km')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label for="price_per_hr" class="block text-sm font-medium leading-6 text-gray-900">price_per_hr</label>
+                            <div class="mt-2">
+                                <input type="text" name="price_per_hr" id="price_per_hr" value="{{ $car->price_per_hr }}"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('price_per_hr')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
 
                         <div class="sm:col-span-2">
                             <label for="price_per_day" class="block text-sm font-medium leading-6 text-gray-900">Price per
@@ -96,7 +151,7 @@
                                     </option>
                                     <option value="1" {{ $car->stars == '1' ? 'selected' : '' }}>1/5</option>
                                     <option value="2" {{ $car->stars == '2' ? 'selected' : '' }}>2/5</option>
-                                    <option value="2" {{ $car->stars == '3' ? 'selected' : '' }}>3/5</option>
+                                    <option value="3" {{ $car->stars == '3' ? 'selected' : '' }}>3/5</option>
                                     <option value="4" {{ $car->stars == '4' ? 'selected' : '' }}>4/5</option>
                                     <option value="5" {{ $car->stars == '5' ? 'selected' : '' }}>5/5</option>
                                 </select>
@@ -106,7 +161,70 @@
                             @enderror
                         </div>
 
+                        <div class="sm:col-span-3">
+                            <label for="luggage" class="block text-sm font-medium leading-6 text-gray-900">Luggage
+                            </label>
+                            <div class="mt-2">
+                                <input type="number" name="luggage" id="luggage" value="{{ $car->luggage }}"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('luggage')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
 
+                        <div class="sm:col-span-3">
+                            <label class="block text-sm font-medium leading-6 text-gray-900">AC</label>
+                            <div class="mt-2">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" id="ac_yes" name="ac" value="yes" {{ $car->ac === 'yes' ? 'checked' : '' }} class="text-pr-400 focus:ring-pr-400">
+                                        <label for="ac_yes" class="text-sm font-medium leading-6 text-gray-900">Yes</label>
+                                        <input type="radio" id="ac_no" name="ac" value="no" {{ $car->ac === 'no' ? 'checked' : '' }} class="text-pr-400 focus:ring-pr-400">
+                                        <label for="ac_no" class="text-sm font-medium leading-6 text-gray-900">No</label>
+                                    </div>
+
+                             </div>
+                                @error('ac')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                  @enderror
+                        </div>
+
+                        <div class="sm:col-span-2">
+                            <label class="block text-sm font-medium leading-6 text-gray-900">Premium</label>
+                            <div class="mt-2">
+                                    <div class="flex items-center space-x-4">
+                                        <input type="radio" id="premium_yes" name="premium" value="yes" {{ $car->premium === 'yes' ? 'checked' : '' }} class="text-pr-400 focus:ring-pr-400">
+                                        <label for="premium_yes" class="text-sm font-medium leading-6 text-gray-900">Yes</label>
+                                        <input type="radio" id="premium_no" name="premium" value="no" {{ $car->premium === 'no' ? 'checked' : '' }} class="text-pr-400 focus:ring-pr-400">
+                                        <label for="premium_no" class="text-sm font-medium leading-6 text-gray-900">No</label>
+                                    </div>
+                             </div>
+                                @error('premium')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                  @enderror
+                        </div>
+                      
+                        <div class="sm:col-span-2" id="premiumStartDateField">
+                            <label for="premium_start_date" class="block text-sm font-medium leading-6 text-gray-900">Premium Start Date</label>
+                            <div class="mt-2">
+                                <input type="date" name="premium_start_date" id="premium_start_date" 
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('premium_start_date')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="sm:col-span-2" id="premiumEndDateField">
+                            <label for="premium_end_date" class="block text-sm font-medium leading-6 text-gray-900">Premium Start Date</label>
+                            <div class="mt-2">
+                                <input type="date" name="premium_end_date" id="premium_end_date" 
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('premium_end_date')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
 
 
                         <div class="col-span-full">
@@ -163,9 +281,9 @@
                                 <select id="status" name="status"
                                     class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:max-w-xs sm:text-sm sm:leading-6">
                                     <option value="available"
-                                        {{ $car->insurance_status == 'available' ? 'selected' : '' }}>Available</option>
+                                        {{ $car->status == 'available' ? 'selected' : '' }}>Available</option>
                                     <option value="unavailable"
-                                        {{ $car->insurance_status == 'unavailable' ? 'selected' : '' }}>Unavailable
+                                        {{ $car->status == 'unavailable' ? 'selected' : '' }}>Unavailable
                                     </option>
                                 </select>
                             </div>
@@ -174,14 +292,40 @@
                             @enderror
                         </div>
 
+                        <div class="sm:col-span-3">
+                            <label for="approval" class="block text-sm font-medium leading-6 text-gray-900">Approval</label>
+                            <div class="mt-2">
+                                <select id="approval" name="approval"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:max-w-xs sm:text-sm sm:leading-6">
+                                    <option value="pending" {{ $car->approval == 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="confirm" {{ $car->approval == 'confirm' ? 'selected' : '' }}>confirm</option>
+                                </select>
+                            </div>
+                            @error('approval')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+
+                        <div class="sm:col-span-3">
+                            <label for="vehicle_id" class="block text-sm font-medium leading-6 text-gray-900">Vehicle ID</label>
+                            <div class="mt-2">
+                                <input type="text" name="vehicle_id" id="vehicle_id" value="{{ $car->vehicle_id }}"
+                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-pr-400 sm:text-sm sm:leading-6">
+                            </div>
+                            @error('vehicle_id')
+                                <span class="text-red-500">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        
+
 
                     </div>
                 </div>
 
 
                 <div class="flex items-center justify-center gap-x-6 mb-6">
-                    <button type="reset"
-                        class="text-sm font-semibold leading-6 text-gray-900 border-2 border-pr-200 p-1 w-20 rounded-md hover:bg-white bg-sec-300">Cancel</button>
+                <a href="{{route('cars.index')}}"
+                        class="w-20 p-1 text-sm font-semibold leading-6 text-center text-gray-900 border-2 rounded-md border-pr-200 hover:bg-white bg-sec-300">Cancel</a>
                     <button type="submit"
                         class="w-1/3 rounded-md bg-pr-400 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-pr-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-pr-400">Save</button>
                 </div>
@@ -192,4 +336,6 @@
         </form>
 
     </div>
+  
+
 @endsection

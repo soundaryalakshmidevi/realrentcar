@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('insu_id')->nullable();
             $table->foreign('insu_id')->references('id')->on('insurances')->onDelete('cascade')->onUpdate('cascade');
 
+            
 
         });
     }
